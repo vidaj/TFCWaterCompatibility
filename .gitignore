@@ -3,3 +3,8 @@
 .settings
 .gradle
 .settings
+*.lock
+*.log
+bin/*
+eclipse/.metadata/*
+eclipse/.recommenders*
