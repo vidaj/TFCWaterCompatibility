@@ -15,13 +15,14 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(
 		modid = "tfcwatercompatibility", 
-		version = "1.0", 
+		version = "1.1", 
 		dependencies = "required-after:terrafirmacraft;"
 				+ "before:Railcraft;"
 				+ "before:RotaryCraft;"
 				+ "before:ElectriCraft;"
 				+ "before:Steamcraft;"
-				+ "before:Forestry")
+				+ "before:Forestry;"
+				+ "before:Thaumcraft")
 public class TFCWaterCompatibility {
 
 	@EventHandler
