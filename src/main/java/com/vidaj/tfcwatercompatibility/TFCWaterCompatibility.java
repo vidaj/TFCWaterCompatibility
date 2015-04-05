@@ -15,7 +15,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(
 		modid = "tfcwatercompatibility", 
-		version = "1.1", 
+		version = "1.2", 
 		dependencies = "required-after:terrafirmacraft;"
 				+ "before:Railcraft;"
 				+ "before:RotaryCraft;"
