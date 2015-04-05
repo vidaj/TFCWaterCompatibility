@@ -5,7 +5,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
 
-import com.bioxx.tfc.Core.TFCFluid;
+import com.bioxx.tfc.api.TFCFluid;
 
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.Fluid;
