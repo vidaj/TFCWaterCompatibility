@@ -5,7 +5,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
 
-import com.bioxx.tfc.api.TFCFluid;
+import com.bioxx.tfc.api.TFCFluids;
 
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.Fluid;
@@ -77,6 +77,6 @@ public class TFCWaterCompatibility {
 	
 	private Fluid getFreshWater() 
 	{
-		return TFCFluid.FRESHWATER;
+		return TFCFluids.FRESHWATER;
 	}
 }
