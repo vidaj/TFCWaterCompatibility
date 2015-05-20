@@ -4,11 +4,16 @@ package com.vidaj.tfcwatercompatibility;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
+import java.util.Map;
 
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCFluids;
 
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.Fluid;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -23,39 +28,44 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 				+ "before:Steamcraft;"
 				+ "before:Forestry;"
 				+ "before:Thaumcraft")
+
 public class TFCWaterCompatibility {
 
+	public static final Fluid ActualWater = FluidRegistry.WATER;
+	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		replaceWaterInFluidRegistryMap();
 		replaceWaterInFluidRegistryStaticField();
-	}
-
-	private void replaceWaterInFluidRegistryMap() {
-		try {
-			Field fluidsField = FluidRegistry.class.getDeclaredField("fluids");
-			fluidsField.setAccessible(true);
-			
-			HashMap<String, Fluid> fluids = (HashMap<String, Fluid>) fluidsField.get(null);
-			fluids.put("water", getFreshWater());
-		} catch (Exception e) {
-			throw new IllegalStateException("Cannot find fluids");
-		}
+		replaceWaterInBlocksStaticField();
 	}
 
 	private void replaceWaterInFluidRegistryStaticField() {
 		try {
 			Field field = FluidRegistry.class.getDeclaredField("WATER");
-			field.setAccessible(true);
-			
-			setFieldFinalState(field, false);
-			
-			field.set(null, getFreshWater());
-			
-			setFieldFinalState(field, true);
+			replaceValueInStaticFinalField(getFreshWater(), field);
 		} catch (Exception e) {
 			throw new IllegalStateException("Cannot inject custom water", e);
 		}
+	}
+
+	private void replaceWaterInBlocksStaticField() {
+		try {
+			Field field = Blocks.class.getDeclaredField("field_150355_j");
+			replaceValueInStaticFinalField(TFCBlocks.FreshWater, field);
+		} catch (Exception e) {
+			throw new IllegalStateException("Cannot replace vanilla water block", e);
+		}
+	}
+	
+	private void replaceValueInStaticFinalField(Object itemToReplace,
+			Field field) throws Exception, IllegalAccessException {
+		field.setAccessible(true);
+		
+		setFieldFinalState(field, false);
+		
+		field.set(null, itemToReplace);
+		
+		setFieldFinalState(field, true);
 	}
 	
 	private void setFieldFinalState(Field field, boolean isFinal) throws Exception
