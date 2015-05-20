@@ -17,8 +17,6 @@ public class FluidRegistryTransformer implements IClassTransformer{
 			byte[] basicClass) {
 
 		if (name.equals("net.minecraftforge.fluids.FluidRegistry")) {
-			FMLLog.info("[VIDAJ] Found FluidRegistry");
-			
 			ClassReader cr = new ClassReader(basicClass);
 			ClassWriter cw = new ClassWriter(cr, 0);
 			ClassVisitor ca = new FluidFixerClassVisitor(cw);
@@ -43,7 +41,6 @@ public class FluidRegistryTransformer implements IClassTransformer{
 			MethodVisitor visitor = super.visitMethod(access, name, desc, signature, exceptions);
 			if (name.equals("getFluid") && "(Ljava/lang/String;)Lnet/minecraftforge/fluids/Fluid;".equals(desc)) // generate
 			{
-				FMLLog.info("[VIDAJ] found getFluid");
 				return new AddEventsMethodVisitor(ASM4, visitor);
 			}
 			
@@ -67,10 +64,6 @@ public class FluidRegistryTransformer implements IClassTransformer{
 			mv.visitInsn(ARETURN);
 			mv.visitLabel(l0);
 			mv.visitFrame(F_SAME, 0, null, 0, null);
-//			mv.visitInsn(ACONST_NULL);
-//			mv.visitInsn(ARETURN);
-//			mv.visitMaxs(2, 1);
-//			mv.visitEnd();
 			super.visitCode();
 		}
 	}

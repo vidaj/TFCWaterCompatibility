@@ -1,0 +1,15 @@
+[
+{
+  "modid": "tfcwatercompatibility",
+  "name": "TFC Water Compatibility",
+  "description": "Makes other mods able to to use TFC fresh water.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "http://minecraft.curseforge.com/mc-mods/228547-tfcwatercompatibility",
+  "updateUrl": "",
+  "authorList": ["vidaj"],
+  "parent": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
